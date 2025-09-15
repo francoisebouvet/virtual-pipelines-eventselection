@@ -3,13 +3,11 @@ on: push
 
 jobs:
   greeting:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo hello world
+  runs-on: ubuntu-latest
+  steps:
+    - run: echo hello world
 
   build_skim:
-
-    needs: greeting
     runs-on: ubuntu-latest
     container: rootproject/root:${{ matrix.version }}
     strategy:
@@ -25,10 +23,10 @@ jobs:
           FLAGS=$(root-config --cflags --libs)
           $COMPILER -g -O3 -Wall -Wextra -Wpedantic -o skim skim.cxx $FLAGS
 
-    - uses: actions/upload-artifact@v4
-      with:
-        name: skim${{ matrix.version }}
-        path: skim
+      - uses: actions/upload-artifact@v4
+        with:
+          name: skim${{ matrix.version }}
+          path: skim
 
   skim:
     needs: build_skim
@@ -43,10 +41,8 @@ jobs:
           name: skim6.26.10-conda
 
       - name: skim
-        run: ./skim
-          
-  run: |
-    chmod +x ./skim
-    ./skim
+        run:
+          chmod +x ./skim
+          ./skim
 
 
