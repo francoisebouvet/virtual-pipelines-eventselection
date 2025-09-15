@@ -3,9 +3,9 @@ on: push
 
 jobs:
   greeting:
-  runs-on: ubuntu-latest
-  steps:
-    - run: echo hello world
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo hello world
 
   build_skim:
     runs-on: ubuntu-latest
